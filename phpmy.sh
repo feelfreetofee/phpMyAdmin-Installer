@@ -62,3 +62,7 @@ certbot --apache
 55 23 * * * /usr/local/bin/cloudflare-ddns --update-now
 00 00 * * * reboot
 @reboot setsid sh /root/server/run.sh
+
+dnf install python39-pip
+pip-3.6 install tld
+
