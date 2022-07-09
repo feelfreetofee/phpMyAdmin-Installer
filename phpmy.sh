@@ -66,3 +66,51 @@ certbot --apache
 dnf install python39-pip
 pip-3.6 install tld
 
+-----------------------------------------------------------
+
+dnf -y install epel-release
+
+dnf update
+
+dnf upgrade
+
+dnf -y groupinstall "Development Tools"
+
+dnf -y install tar git wget python39 python39-pip nano
+
+dnf -y install httpd
+
+systemctl enable --now httpd
+
+dnf -y install mariadb-server mariadb
+
+systemctl enable --now mariadb
+
+dnf module reset php
+
+dnf module install php:8.0
+
+dnf -y install php php-{curl,gd,xml,zip,mysqlnd,mbstring,devel,common,bcmath,process,snmp,json,pdo}
+
+dnf clean all
+
+systemctl restart httpd
+
+cd /var/www/html/
+
+wget -q https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.xz
+
+tar xf phpMyAdmin-latest-all-languages.tar.xz
+
+rm -rf phpMyAdmin-latest-all-languages.tar.xz
+
+mv phpMyAdmin-* phpMyAdmin
+
+mysql_secure_installation
+dnf -y install certbot python3-certbot-apache
+cd /etc/httpd/conf.d/
+nano timerp.eu.org.conf
+<VirtualHost *:80>
+ServerName timerp.eu.org
+DocumentRoot /var/www/html
+</VirtualHost>
